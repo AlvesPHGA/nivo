@@ -1,9 +1,14 @@
 import { Plus } from 'lucide-react';
+import { Header } from './components/global/Header/Header';
+import { Tabs } from './components/Tabs/Tabs';
 
 export function App() {
    return (
       <div className="py-10 space-y-8">
-         <header></header>
+         <div>
+            <Header />
+            <Tabs />
+         </div>
          <main className="max-w-6xl mx-auto space-y-5">
             <div className="flex items-center gap-3">
                <h1 className="text-xl font-bold">Tags</h1>
