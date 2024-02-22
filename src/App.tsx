@@ -1,8 +1,16 @@
-import { FileDown, Plus, Search } from 'lucide-react';
+import { FileDown, MoreHorizontal, Plus, Search } from 'lucide-react';
 import { Header } from './components/global/Header/Header';
 import { Tabs } from './components/Tabs/Tabs';
 import { Button } from './components/ui/Button';
 import { Control, Input } from './components/ui/Input';
+import {
+   Table,
+   TableBody,
+   TableCell,
+   TableHead,
+   TableHeader,
+   TableRow,
+} from './components/ui/Table';
 
 export function App() {
    return (
@@ -31,6 +39,43 @@ export function App() {
                   Export
                </Button>
             </div>
+
+            <Table>
+               <TableHeader>
+                  <TableRow>
+                     <TableHead></TableHead>
+                     <TableHead>Tag</TableHead>
+                     <TableHead>Amount of videos</TableHead>
+                     <TableHead></TableHead>
+                  </TableRow>
+               </TableHeader>
+
+               <TableBody>
+                  {Array.from({ length: 10 }).map((value, index) => {
+                     return (
+                        <TableRow key={index}>
+                           <TableCell></TableCell>
+                           <TableCell>
+                              <div className="flex flex-col gap-0.5">
+                                 <span className="font-medium">React</span>
+                                 <span className="text-xs text-zinc-500">
+                                    3452-2345-0987-09AP
+                                 </span>
+                              </div>
+                           </TableCell>
+                           <TableCell className="text-zinc-300">
+                              13 video(s)
+                           </TableCell>
+                           <TableCell className="text-right">
+                              <Button size="icon">
+                                 <MoreHorizontal className="size-4" />
+                              </Button>
+                           </TableCell>
+                        </TableRow>
+                     );
+                  })}
+               </TableBody>
+            </Table>
          </main>
       </div>
    );
