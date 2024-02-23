@@ -1,7 +1,12 @@
 import { useSearchParams } from 'react-router-dom';
 import { Select, SelectContent, SelectItem, SelectTrigger } from '../ui/Select';
 import { Button } from '../ui/Button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import {
+   ChevronLeft,
+   ChevronRight,
+   ChevronsLeft,
+   ChevronsRight,
+} from 'lucide-react';
 
 interface PaginationProps {
    pages: number;
@@ -21,7 +26,9 @@ export function Pagination({ pages, items, page }: PaginationProps) {
    }
 
    function previousPage() {
-      if (page - 1 <= 0) return;
+      if (page - 1 <= 0) {
+         return;
+      }
 
       setSearchParams((params) => {
          params.set('page', String(page - 1));
@@ -30,7 +37,9 @@ export function Pagination({ pages, items, page }: PaginationProps) {
    }
 
    function nextPage() {
-      if (page + 1 > pages) return;
+      if (page + 1 > pages) {
+         return;
+      }
       setSearchParams((params) => {
          params.set('page', String(page + 1));
          return params;
@@ -67,7 +76,7 @@ export function Pagination({ pages, items, page }: PaginationProps) {
 
             <div className="space-x-1.5">
                <Button onClick={firstPage} size="icon" disabled={page - 1 <= 0}>
-                  <ChevronLeft className="size-4" />
+                  <ChevronsLeft className="size-4" />
                   <span className="sr-only">First page</span>
                </Button>
 
@@ -94,7 +103,7 @@ export function Pagination({ pages, items, page }: PaginationProps) {
                   size="icon"
                   disabled={page + 1 > pages}
                >
-                  <ChevronRight className="size-4" />
+                  <ChevronsRight className="size-4" />
                   <span className="sr-only">Last page</span>
                </Button>
             </div>
