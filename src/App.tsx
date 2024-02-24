@@ -14,11 +14,27 @@ import {
 import { useQuery } from '@tanstack/react-query';
 // import { Pagination } from './components/Pagination/Pagination';
 
+export type TagResponse = TagRes[];
+
+export interface TagRes {
+   title: string;
+   amountOfVideos: number;
+}
+
 export function App() {
-   const data = useQuery({
+   const { data: tagsResponse, isLoading } = useQuery<TagResponse>({
       queryKey: ['get-tags'],
-      queryFn: () => {},
+      queryFn: async () => {
+         const res = await fetch(
+            'http://localhost:3333/tags?_page=1&_per_page=10',
+         );
+         const data = await res.json();
+         console.log(data);
+         return data;
+      },
    });
+
+   if (isLoading) return null;
 
    return (
       <div className="py-10 space-y-8">
@@ -58,20 +74,22 @@ export function App() {
                </TableHeader>
 
                <TableBody>
-                  {Array.from({ length: 10 }).map((value, index) => {
+                  {tagsResponse?.map((tag) => {
                      return (
-                        <TableRow key={index}>
+                        <TableRow key={tag.title}>
                            <TableCell></TableCell>
                            <TableCell>
                               <div className="flex flex-col gap-0.5">
-                                 <span className="font-medium">React</span>
+                                 <span className="font-medium">
+                                    {tag.title}
+                                 </span>
                                  <span className="text-xs text-zinc-500">
                                     3452-2345-0987-09AP
                                  </span>
                               </div>
                            </TableCell>
                            <TableCell className="text-zinc-300">
-                              13 video(s)
+                              {tag.amountOfVideos} video(s)
                            </TableCell>
                            <TableCell className="text-right">
                               <Button size="icon">
