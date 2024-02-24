@@ -11,9 +11,15 @@ import {
    TableHeader,
    TableRow,
 } from './components/ui/Table';
+import { useQuery } from '@tanstack/react-query';
 // import { Pagination } from './components/Pagination/Pagination';
 
 export function App() {
+   const data = useQuery({
+      queryKey: ['get-tags'],
+      queryFn: () => {},
+   });
+
    return (
       <div className="py-10 space-y-8">
          <div>
