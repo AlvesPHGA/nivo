@@ -12,9 +12,17 @@ import {
    TableRow,
 } from './components/ui/Table';
 import { useQuery } from '@tanstack/react-query';
-// import { Pagination } from './components/Pagination/Pagination';
+import { Pagination } from './components/Pagination/Pagination';
 
-export type TagResponse = TagRes[];
+export interface TagResponse {
+   first: number;
+   prev: number | null;
+   next: number;
+   last: number;
+   pages: number;
+   items: number;
+   data: TagRes[];
+}
 
 export interface TagRes {
    title: string;
@@ -29,7 +37,6 @@ export function App() {
             'http://localhost:3333/tags?_page=1&_per_page=10',
          );
          const data = await res.json();
-         console.log(data);
          return data;
       },
    });
@@ -102,7 +109,13 @@ export function App() {
                </TableBody>
             </Table>
 
-            {/* <Pagination /> */}
+            {tagsResponse && (
+               <Pagination
+                  pages={tagsResponse.pages}
+                  items={tagsResponse.items}
+                  page={1}
+               />
+            )}
          </main>
       </div>
    );
